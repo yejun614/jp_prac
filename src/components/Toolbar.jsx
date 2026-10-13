@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { registry } from '../lib/registry.js'
 import { MODES } from '../lib/modes.js'
+import AppNav from './AppNav.jsx'
 
 const TEXT_COLORS = ['#111827', '#6b7280', '#dc2626', '#ea580c', '#ca8a04', '#16a34a', '#0891b2', '#2563eb', '#7c3aed', '#db2777']
 const HIGHLIGHTS = ['#fef08a', '#fed7aa', '#fecaca', '#bbf7d0', '#a5f3fc', '#bfdbfe', '#ddd6fe', '#fbcfe8', '#e5e7eb']
@@ -122,9 +123,7 @@ export default function Toolbar({ mode, setMode, onDownload, onOpenDict, sidebar
       <button className={'tb-btn' + (sidebarOpen ? ' on' : '')} title="메모 목록" onClick={toggleSidebar}>
         ☰
       </button>
-      <div className="brand">
-        メモ<span>帳</span>
-      </div>
+      <AppNav />
 
       <div className="mode-switch" role="radiogroup" aria-label="입력 모드">
         {MODES.map((m) => (

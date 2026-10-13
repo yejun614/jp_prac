@@ -910,3 +910,32 @@ body.resizing-row * {
     padding: 18px;
   }
 }
+
+/* ---------- 페이지 이동 ---------- */
+.app-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 6px 0 2px;
+}
+.app-nav a {
+  padding: 4px 10px;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.app-nav a:hover {
+  background: #f0f0ee;
+  color: var(--text);
+}
+.app-nav a.on {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
+}
+.app-nav a span {
+  color: var(--accent);
+}

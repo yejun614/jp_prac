@@ -1,0 +1,432 @@
+/* ---------- 타자연습 ---------- */
+.typing-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.typing-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.typing-title {
+  font-size: 13px;
+  color: var(--muted);
+}
+.typing-main {
+  flex: 1;
+  width: min(920px, 100%);
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+.ty-warning {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+.muted.small {
+  font-size: 12.5px;
+}
+
+.ty-ready,
+.ty-result {
+  text-align: center;
+}
+.ty-ready h1,
+.ty-result h1 {
+  font-size: 24px;
+  margin: 10px 0 22px;
+}
+.ty-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.ty-mode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 12px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--panel);
+  cursor: pointer;
+  position: relative;
+}
+.ty-mode:hover {
+  border-color: #f3b4c1;
+}
+.ty-mode.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.ty-mode-key {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.ty-mode-name {
+  font-size: 20px;
+  font-weight: 800;
+}
+.ty-mode-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.ty-kanaset {
+  margin-top: 16px;
+}
+.ty-kanaset button {
+  border: 0;
+  background: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ty-kanaset button.on {
+  background: var(--panel);
+  color: var(--accent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+/* 표시 옵션 */
+.ty-options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 20px;
+}
+.ty-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.ty-toggle.disabled {
+  opacity: 0.55;
+}
+.ty-toggle-label {
+  font-weight: 600;
+}
+.ty-toggle-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.ty-kanaset,
+.ty-seg {
+  display: inline-flex;
+  padding: 3px;
+  background: #efefec;
+  border-radius: 10px;
+}
+.ty-seg button {
+  border: 0;
+  background: none;
+  padding: 5px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ty-seg button:disabled {
+  cursor: default;
+}
+.ty-seg button.on {
+  background: var(--panel);
+  color: var(--accent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+/* 가린 줄: 안 친 글자는 보이지 않게 자리만 차지하고 점선 밑줄로 표시.
+   글자는 안쪽 span 의 opacity 로 숨긴다 (color: transparent 는 다크 모드 확장 등이 덮어쓸 수 있음) */
+.concealed {
+  border-bottom: 2px dashed var(--line-strong);
+  user-select: none;
+}
+.concealed > span {
+  opacity: 0;
+}
+.hidden-line .typed {
+  color: #8b8e93;
+}
+.ty-romaji .cursor.hint {
+  animation: ty-hint 1s infinite;
+}
+@keyframes ty-hint {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.ty-start {
+  margin: 26px 0 10px;
+  padding: 12px 40px;
+  font-size: 16px;
+}
+.ty-records {
+  margin: 26px auto 0;
+  max-width: 460px;
+  text-align: left;
+  font-size: 13px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.ty-records ol {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.ty-records li {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 0.7fr;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.ty-progress {
+  height: 4px;
+  background: #ececea;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.ty-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s;
+}
+.ty-stats {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin: 12px 0 18px;
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.ty-kb-toggle {
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 1px 8px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.ty-kb-toggle:hover {
+  color: var(--text);
+}
+.ty-stats b {
+  color: var(--text);
+}
+
+/* 문제 카드: 한자 문장 → 가나 읽기 → 로마자 순서로 위에서 아래로 */
+.ty-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 34px 28px 28px;
+  text-align: center;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 0.04);
+}
+.ty-text {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+/* 후리가나 */
+.ty-text ruby rt {
+  font-size: 0.42em;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.ty-kana-main {
+  font-size: 44px;
+}
+.ty-kana {
+  margin-top: 8px;
+  font-size: 21px;
+  letter-spacing: 0.04em;
+  color: #4b5058;
+}
+.ty-kana .typed,
+.ty-kana-main .typed {
+  color: #c4c6ca;
+}
+.ty-kana .current,
+.ty-kana-main .current {
+  color: var(--accent);
+}
+.ty-romaji {
+  margin-top: 14px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #4b5058;
+  overflow-wrap: anywhere;
+}
+.ty-romaji .typed {
+  color: #c4c6ca;
+}
+.ty-romaji .cursor {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+.ty-romaji[data-miss] {
+  animation: ty-shake 0.18s;
+}
+.ty-romaji[data-miss] .cursor {
+  animation: ty-miss 0.35s;
+}
+@keyframes ty-shake {
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+@keyframes ty-miss {
+  from {
+    background: #fecaca;
+  }
+  to {
+    background: transparent;
+  }
+}
+.ty-ko {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.ty-next {
+  margin: 14px 0 22px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 화면 키보드 */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+.kb-row {
+  display: flex;
+  gap: 5px;
+}
+.kb-row-1 {
+  margin-left: 22px;
+}
+.kb-row-2 {
+  margin-left: 34px;
+}
+.kb-key {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 7px;
+  background: var(--panel);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.kb-key.home {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.kb-shift {
+  width: 70px;
+  font-size: 11px;
+}
+.kb-space {
+  width: 260px;
+  font-size: 11px;
+}
+.kb-key.next {
+  background: var(--accent);
+  border-color: #be123c;
+  color: #fff;
+}
+
+/* 결과 */
+.ty-result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.ty-result-grid > div {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ty-result-grid span {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.ty-result-grid b {
+  font-size: 30px;
+  font-variant-numeric: tabular-nums;
+}
+.ty-result-grid small {
+  color: var(--muted);
+}
+.ty-worst {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.ty-worst span {
+  display: inline-block;
+  margin: 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.ty-worst small {
+  font-size: 12px;
+  color: var(--accent);
+}
+.ty-result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+@media (max-width: 640px) {
+  .ty-modes,
+  .ty-result-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kb-key {
+    width: 28px;
+    height: 32px;
+  }
+}
